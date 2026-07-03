@@ -1,0 +1,6 @@
+{
+  "name": "Multi-Website AI Chatbot System",
+  "description": "A full-stack RAG-powered chatbot platform with multi-website scraping, automated lead capture flows, detailed analytics dashboards, and an embeddable floating widget.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

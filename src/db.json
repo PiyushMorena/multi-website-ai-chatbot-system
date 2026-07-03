@@ -1,0 +1,892 @@
+{
+  "websites": [
+    {
+      "id": "example-saas",
+      "name": "teacher education ",
+      "url": "https://uat.morenateach.com/",
+      "welcomeMessage": "👋 Welcome to ai agent I can help you with features, pricing, or setup.",
+      "contactPageUrl": "https://uat.morenateach.com/contact-us",
+      "leadCaptureEnabled": true,
+      "createdAt": "2026-07-03T08:40:08.772Z",
+      "status": "scraped"
+    },
+    {
+      "id": "example-coffee",
+      "name": "Brew & Co. Coffee",
+      "url": "https://brewco.coffee",
+      "welcomeMessage": "☕️ Hello! Ready for the perfect cup? Ask me about our blends, locations, or brewing tips.",
+      "contactPageUrl": "https://brewco.coffee/contact-us",
+      "leadCaptureEnabled": true,
+      "createdAt": "2026-07-03T08:40:08.773Z",
+      "status": "scraped"
+    }
+  ],
+  "pages": [
+    {
+      "id": "bc-home",
+      "websiteId": "example-coffee",
+      "url": "https://brewco.coffee",
+      "title": "Brew & Co. - Artisanal Coffee Roasters",
+      "content": "Brew & Co. is an independent, family-owned coffee roaster based in Portland, Oregon. We ethically source organic, single-origin Arabica beans directly from small-holder farms in Ethiopia, Colombia, and Sumatra. We roast our beans in small batches daily to bring out their unique, vibrant flavor profiles. Visually explore our rotating single-origin list or try our signature Midnight Blend, featuring notes of dark chocolate and black cherry.",
+      "charCount": 442,
+      "lastScraped": "2026-07-03T08:40:08.773Z"
+    },
+    {
+      "id": "bc-locations",
+      "websiteId": "example-coffee",
+      "url": "https://brewco.coffee/locations",
+      "title": "Brew & Co. Cafes & Locations",
+      "content": "We have three locations in Portland. 1. Downtown Flagship Cafe: 404 Espresso Blvd, open 6 AM - 8 PM daily. Features a slow-pour bar and roasting tours every Saturday at 11 AM. 2. Eastside Coffee Lab: 88 Crema St, open 7 AM - 6 PM daily, focusing on alternative brewing methods (Chemex, Syphon, Aeropress). 3. The Roastery Barn: 12 Bean Way, open 8 AM - 4 PM Monday to Friday, where we package our beans and host public cupping events.",
+      "charCount": 452,
+      "lastScraped": "2026-07-03T08:40:08.773Z"
+    },
+    {
+      "id": "bc-brewing",
+      "websiteId": "example-coffee",
+      "url": "https://brewco.coffee/brewing",
+      "title": "Coffee Brewing Guides",
+      "content": "Make the perfect cup at home. French Press: Use a coarse grind (sea salt size) with a 1:15 coffee-to-water ratio. Steep in 200°F water for exactly 4 minutes, then plunge gently. Pour Over (V60): Use a medium-fine grind (sand size) with a 1:16 ratio. Pour water in circular motions, keeping total brew time around 3 minutes. Storage Tip: Always store your coffee beans in an airtight container in a cool, dark cupboard. Do NOT freeze or refrigerate your beans, as moisture will damage the flavor.",
+      "charCount": 512,
+      "lastScraped": "2026-07-03T08:40:08.773Z"
+    },
+    {
+      "id": "bc-contact",
+      "websiteId": "example-coffee",
+      "url": "https://brewco.coffee/contact-us",
+      "title": "Get In Touch with Brew & Co.",
+      "content": "We love talking coffee! Drop by any of our cafes, email us at hello@brewco.coffee, or call our roasting facility at +1 (503) 555-BREW (9 AM - 5 PM PST, Mon-Fri). For wholesale inquiries and custom office subscriptions, please reach out to wholesale@brewco.coffee. We ship our freshly roasted bags nationwide, with free shipping on subscriptions!",
+      "charCount": 372,
+      "lastScraped": "2026-07-03T08:40:08.773Z"
+    },
+    {
+      "websiteId": "example-saas",
+      "url": "https://uat.morenateach.com/",
+      "title": "Morena Teach | Premier Online Teacher Education & Professional Development",
+      "content": "Welcome to Morena Teach, the ultimate online education portal designed specifically for modern educators seeking licensing, continuous professional development (CPD), and classroom mastery. Our mission is to empower teachers, administrators, and educational support staff with top-tier training, high-quality curriculum resources, and state-aligned preparation programs. Whether you are seeking to renew your teaching certificate, complete your mandatory Continuing Education Units (CEUs), learn how to integrate AI in the classroom, or master special education accommodation strategies, Morena Teach provides self-paced, expert-led training courses that fit your busy schedule. We help schools improve teaching quality, train educators, strengthen leadership teams, and implement modern international education practices.",
+      "charCount": 810,
+      "id": "page-jrbsdb2",
+      "lastScraped": "2026-07-03T09:26:22.144Z"
+    },
+    {
+      "websiteId": "example-saas",
+      "url": "https://uat.morenateach.com/tifl-tara",
+      "title": "TIFL TARA International Outreach - Morena Teach",
+      "content": "Behind every thriving learning community is a shared commitment to professional growth, educational excellence, and meaningful student outcomes. TIFL TARA is Morenateach’s international outreach and engagement platform dedicated to supporting schools, educators, and educational leaders across the Middle East. We partner with schools to strengthen teaching and learning, build leadership capacity, enhance curriculum and assessment practices, and create future-ready learning environments where both educators and learners can thrive. In a rapidly evolving educational landscape, schools face increasing expectations to deliver high-quality learning experiences, support educator wellbeing, foster innovation, and prepare students for an increasingly complex world. TIFL TARA connects schools with the expertise, programs, and educational solutions needed to navigate these challenges with confidence and purpose.",
+      "charCount": 918,
+      "id": "page-zoysb1w",
+      "lastScraped": "2026-07-03T09:26:22.146Z"
+    },
+    {
+      "websiteId": "example-saas",
+      "url": "https://uat.morenateach.com/services",
+      "title": "Our Programs & Services - Morena Teach",
+      "content": "We offer comprehensive school solutions and professional development programs.\n1. Developing Exceptional Educators: Great learning begins with great teaching. We support educators through professional learning experiences that strengthen instructional practice, inquiry-based learning, assessment literacy, inclusion, and learner engagement.\n2. Strengthening School Performance: Sustainable improvement requires a clear understanding of strengths, opportunities, and priorities. We work alongside schools to enhance teaching quality, professional learning cultures, and whole-school improvement initiatives.\n3. Advancing Early Years Excellence: The early years establish the foundation for lifelong learning. We help schools strengthen early childhood programs, improve school readiness outcomes, enhance educator capability, and create exceptional learning experiences for young learners.\n4. Enhancing Curriculum and Learning: Curriculum should inspire curiosity, engagement, and deeper understanding. We support schools through curriculum design, curriculum review, inquiry integration, learning experience design, and assessment framework development.\n5. Building Future-Ready Leaders: Strong leadership drives educational excellence. We support principals, coordinators, and leadership teams in developing the capabilities needed to lead teaching and learning, drive improvement, and navigate change effectively.",
+      "charCount": 1404,
+      "id": "page-gxjx7ih",
+      "lastScraped": "2026-07-03T09:26:22.152Z"
+    },
+    {
+      "websiteId": "example-saas",
+      "url": "https://uat.morenateach.com/pricing",
+      "title": "Course Subscriptions & Pricing - Morena Teach",
+      "content": "Discover flexible pricing packages built for schools, individual teachers, and large education networks.\n1. Individual Educator License: $15/month - includes unlimited access to all self-paced teacher education courses, verified CPD certificates, and downloadable lesson planning resources.\n2. School Development Plan: $89/month - includes license for up to 15 educators, custom admin tracking dashboard, monthly curriculum review, and priority email support.\n3. Institutional/Network Plan: Custom Quote - includes unlimited teacher licenses, bespoke school enhancement programs, early years excellence advisory, and dedicated education consulting.",
+      "charCount": 634,
+      "id": "page-u9p7wsa",
+      "lastScraped": "2026-07-03T09:26:22.153Z"
+    },
+    {
+      "websiteId": "example-saas",
+      "url": "https://uat.morenateach.com/contact-us",
+      "title": "Contact Support - Morena Teach",
+      "content": "We are here to help! Reach out directly to our team:\nHead Office: A-28, Block A, Sector 57, Noida, Uttar Pradesh 201309.\nEmail : morena@morenateach.com\nPhone No : +91 9625972523 or +1 (555) 321-7890 (available Monday through Friday, 9:00 AM to 5:00 PM EST).\nOur support team is ready to assist you with registration, course enrollment, institutional partnerships, and platform help.",
+      "charCount": 382,
+      "id": "page-gzl9qxl",
+      "lastScraped": "2026-07-03T09:26:22.153Z"
+    }
+  ],
+  "leads": [
+    {
+      "id": "lead-1",
+      "websiteId": "example-saas",
+      "sessionId": "sess-1",
+      "name": "Sarah Connor",
+      "email": "sarah@skynet.com",
+      "phone": "+1 (415) 555-0199",
+      "ipAddress": "192.168.1.42",
+      "createdAt": "2026-07-01T08:40:08.773Z",
+      "status": "new"
+    },
+    {
+      "id": "lead-2",
+      "websiteId": "example-saas",
+      "sessionId": "sess-2",
+      "name": "John Doe",
+      "email": "john.doe@gmail.com",
+      "phone": "+1 (555) 019-2834",
+      "ipAddress": "102.15.22.4",
+      "createdAt": "2026-07-02T08:40:08.773Z",
+      "status": "contacted"
+    },
+    {
+      "id": "lead-3",
+      "websiteId": "example-coffee",
+      "sessionId": "sess-3",
+      "name": "Michael Scott",
+      "email": "michael@dundermifflin.com",
+      "phone": "+1 (717) 555-0145",
+      "ipAddress": "72.144.11.23",
+      "createdAt": "2026-07-02T20:40:08.773Z",
+      "status": "new"
+    },
+    {
+      "websiteId": "example-saas",
+      "sessionId": "sess-gqkooqjhhqs",
+      "name": "piyush",
+      "email": "piyushshri253@gmail.com",
+      "phone": "98989898989",
+      "ipAddress": "127.0.0.1",
+      "id": "lead-dm024zi",
+      "createdAt": "2026-07-03T08:42:08.700Z",
+      "status": "new"
+    },
+    {
+      "websiteId": "example-saas",
+      "sessionId": "sess-j0m4tbliqtn",
+      "name": "piyush",
+      "email": "piyush@morenatechnologies.com",
+      "phone": "9849389483",
+      "ipAddress": "127.0.0.1",
+      "id": "lead-ml3b3wq",
+      "createdAt": "2026-07-03T08:43:56.206Z",
+      "status": "new"
+    },
+    {
+      "websiteId": "example-saas",
+      "sessionId": "sess-e268ot3we9g",
+      "name": "piyush",
+      "email": "test@gmail.com",
+      "phone": "9898989898",
+      "ipAddress": "127.0.0.1",
+      "id": "lead-g4oi3z8",
+      "createdAt": "2026-07-03T09:05:47.796Z",
+      "status": "new"
+    },
+    {
+      "websiteId": "example-saas",
+      "sessionId": "sess-08kh6pe2f0oo",
+      "name": "test",
+      "email": "test@gmail.com",
+      "phone": "98989989899",
+      "ipAddress": "127.0.0.1",
+      "id": "lead-h4yd4q2",
+      "createdAt": "2026-07-03T09:08:24.969Z",
+      "status": "new"
+    },
+    {
+      "websiteId": "example-saas",
+      "sessionId": "sess-bjxwnqils49",
+      "name": "piyush",
+      "email": "test@gmail.com",
+      "phone": "898989898",
+      "ipAddress": "127.0.0.1",
+      "id": "lead-sqgzyb0",
+      "createdAt": "2026-07-03T09:13:41.103Z",
+      "status": "new"
+    },
+    {
+      "websiteId": "example-saas",
+      "sessionId": "sess-t7krms9l4nj",
+      "name": "test",
+      "email": "test@gmail.com",
+      "phone": "9839849384",
+      "ipAddress": "127.0.0.1",
+      "id": "lead-zfrq9n1",
+      "createdAt": "2026-07-03T09:19:16.801Z",
+      "status": "new"
+    }
+  ],
+  "sessions": [
+    {
+      "id": "sess-1",
+      "websiteId": "example-saas",
+      "leadId": "lead-1",
+      "visitorIp": "192.168.1.42",
+      "createdAt": "2026-07-01T08:40:08.773Z",
+      "updatedAt": "2026-07-01T08:45:08.773Z",
+      "pageVisited": "https://cloudsync.io/pricing",
+      "messages": [
+        {
+          "id": "m1",
+          "role": "system",
+          "content": "Lead captured: Sarah Connor (sarah@skynet.com, +1 (415) 555-0199)",
+          "timestamp": "2026-07-01T08:40:08.773Z"
+        },
+        {
+          "id": "m2",
+          "role": "user",
+          "content": "What features does the starter plan support?",
+          "timestamp": "2026-07-01T08:41:08.773Z"
+        },
+        {
+          "id": "m3",
+          "role": "model",
+          "content": "The Starter Plan costs $8 per user/month and includes 100GB of secure cloud storage, a 30-day file version history, and support for up to 5 team members.",
+          "timestamp": "2026-07-01T08:41:13.773Z"
+        }
+      ]
+    },
+    {
+      "id": "sess-2",
+      "websiteId": "example-saas",
+      "leadId": "lead-2",
+      "visitorIp": "102.15.22.4",
+      "createdAt": "2026-07-02T08:40:08.773Z",
+      "updatedAt": "2026-07-02T08:43:08.773Z",
+      "pageVisited": "https://cloudsync.io",
+      "messages": [
+        {
+          "id": "m4",
+          "role": "system",
+          "content": "Lead captured: John Doe (john.doe@gmail.com, +1 (555) 019-2834)",
+          "timestamp": "2026-07-02T08:40:08.773Z"
+        },
+        {
+          "id": "m5",
+          "role": "user",
+          "content": "Do you offer encryption?",
+          "timestamp": "2026-07-02T08:40:38.773Z"
+        },
+        {
+          "id": "m6",
+          "role": "model",
+          "content": "Yes! CloudSync features military-grade end-to-end encryption using AES-256 standards, ensuring your files are safe during storage and transit.",
+          "timestamp": "2026-07-02T08:40:43.773Z"
+        }
+      ]
+    },
+    {
+      "id": "sess-3",
+      "websiteId": "example-coffee",
+      "leadId": "lead-3",
+      "visitorIp": "72.144.11.23",
+      "createdAt": "2026-07-02T20:40:08.773Z",
+      "updatedAt": "2026-07-02T20:44:08.773Z",
+      "pageVisited": "https://brewco.coffee/locations",
+      "messages": [
+        {
+          "id": "m7",
+          "role": "system",
+          "content": "Lead captured: Michael Scott (michael@dundermifflin.com, +1 (717) 555-0145)",
+          "timestamp": "2026-07-02T20:40:08.773Z"
+        },
+        {
+          "id": "m8",
+          "role": "user",
+          "content": "Where can I buy your coffee in Portland?",
+          "timestamp": "2026-07-02T20:41:08.773Z"
+        },
+        {
+          "id": "m9",
+          "role": "model",
+          "content": "We have three cafe locations in Portland: 1) Downtown Flagship Cafe (404 Espresso Blvd), 2) Eastside Coffee Lab (88 Cream St), and 3) The Roastery Barn (12 Bean Way). You can buy our freshly roasted beans directly from any of these locations or subscribe online!",
+          "timestamp": "2026-07-02T20:41:13.773Z"
+        }
+      ]
+    },
+    {
+      "id": "sess-gqkooqjhhqs",
+      "websiteId": "example-saas",
+      "visitorIp": "127.0.0.1",
+      "createdAt": "2026-07-03T08:41:51.821Z",
+      "updatedAt": "2026-07-03T08:42:22.230Z",
+      "messages": [
+        {
+          "id": "m-usr-1783068111821",
+          "role": "user",
+          "content": "hii",
+          "timestamp": "2026-07-03T08:41:51.821Z"
+        },
+        {
+          "id": "m-sys-1783068111821",
+          "role": "model",
+          "content": "👋 Welcome! I’m your website assistant.\nBefore we start, please share your details.\n\nWhat is your name?",
+          "timestamp": "2026-07-03T08:41:51.821Z"
+        },
+        {
+          "id": "m-usr-1783068117859",
+          "role": "user",
+          "content": "piyush",
+          "timestamp": "2026-07-03T08:41:57.859Z"
+        },
+        {
+          "id": "m-sys-1783068117859",
+          "role": "model",
+          "content": "Thanks piyush! What is your email address?",
+          "timestamp": "2026-07-03T08:41:57.859Z"
+        },
+        {
+          "id": "m-usr-1783068124340",
+          "role": "user",
+          "content": "piyushshri253@gmail.com",
+          "timestamp": "2026-07-03T08:42:04.340Z"
+        },
+        {
+          "id": "m-sys-1783068124340",
+          "role": "model",
+          "content": "Thanks! What is your phone number?",
+          "timestamp": "2026-07-03T08:42:04.340Z"
+        },
+        {
+          "id": "m-usr-1783068128700",
+          "role": "user",
+          "content": "98989898989",
+          "timestamp": "2026-07-03T08:42:08.700Z"
+        },
+        {
+          "id": "m-sys-log-1783068128700",
+          "role": "system",
+          "content": "Lead captured: piyush (piyushshri253@gmail.com, 98989898989)",
+          "timestamp": "2026-07-03T08:42:08.700Z"
+        },
+        {
+          "id": "m-sys-1783068128700",
+          "role": "model",
+          "content": "Thanks piyush 👍 Now you can ask anything about this website.",
+          "timestamp": "2026-07-03T08:42:08.700Z"
+        },
+        {
+          "id": "m-usr-1783068142230",
+          "role": "user",
+          "content": "i am  looking for teacher education",
+          "timestamp": "2026-07-03T08:42:22.230Z"
+        },
+        {
+          "id": "m-sys-1783068142230",
+          "role": "model",
+          "content": "I could not find this information on the website. \n\nIf you have any questions or need assistance, please contact our support team. You can reach out to us by visiting our contact page: https://cloudsync.io/contact",
+          "timestamp": "2026-07-03T08:42:22.230Z"
+        }
+      ],
+      "pageVisited": "https://ais-dev-duqb73buklup6rzfen7c3i-559113125525.asia-southeast1.run.app/",
+      "metadata": {
+        "leadCaptureStep": "completed",
+        "leadName": "piyush",
+        "leadEmail": "piyushshri253@gmail.com",
+        "leadPhone": "98989898989"
+      },
+      "leadId": "lead-dm024zi"
+    },
+    {
+      "id": "sess-j0m4tbliqtn",
+      "websiteId": "example-saas",
+      "visitorIp": "127.0.0.1",
+      "createdAt": "2026-07-03T08:43:45.797Z",
+      "updatedAt": "2026-07-03T09:07:57.135Z",
+      "messages": [
+        {
+          "id": "m-usr-1783068225797",
+          "role": "user",
+          "content": "hello",
+          "timestamp": "2026-07-03T08:43:45.797Z"
+        },
+        {
+          "id": "m-sys-1783068225797",
+          "role": "model",
+          "content": "👋 Welcome! I’m your website assistant.\nBefore we start, please share your details.\n\nWhat is your name?",
+          "timestamp": "2026-07-03T08:43:45.797Z"
+        },
+        {
+          "id": "m-usr-1783068230503",
+          "role": "user",
+          "content": "piyush",
+          "timestamp": "2026-07-03T08:43:50.503Z"
+        },
+        {
+          "id": "m-sys-1783068230503",
+          "role": "model",
+          "content": "Thanks piyush! What is your email address?",
+          "timestamp": "2026-07-03T08:43:50.503Z"
+        },
+        {
+          "id": "m-usr-1783068233654",
+          "role": "user",
+          "content": "piyush@morenatechnologies.com",
+          "timestamp": "2026-07-03T08:43:53.654Z"
+        },
+        {
+          "id": "m-sys-1783068233654",
+          "role": "model",
+          "content": "Thanks! What is your phone number?",
+          "timestamp": "2026-07-03T08:43:53.654Z"
+        },
+        {
+          "id": "m-usr-1783068236207",
+          "role": "user",
+          "content": "9849389483",
+          "timestamp": "2026-07-03T08:43:56.207Z"
+        },
+        {
+          "id": "m-sys-log-1783068236207",
+          "role": "system",
+          "content": "Lead captured: piyush (piyush@morenatechnologies.com, 9849389483)",
+          "timestamp": "2026-07-03T08:43:56.207Z"
+        },
+        {
+          "id": "m-sys-1783068236207",
+          "role": "model",
+          "content": "Thanks piyush 👍 Now you can ask anything about this website.",
+          "timestamp": "2026-07-03T08:43:56.207Z"
+        },
+        {
+          "id": "m-usr-1783068672041",
+          "role": "user",
+          "content": "hi",
+          "timestamp": "2026-07-03T08:51:12.041Z"
+        },
+        {
+          "id": "m-sys-1783068672041",
+          "role": "model",
+          "content": "Hello Piyush! How can I help you today? \n\nAt Morena Teach, we offer professional teacher education, certified professional development, and courses like Classroom Management Mastery and Modern Pedagogy. Whether you have questions about our courses, subscription plans, or technical support, I am here to assist you. \n\nFor more details, you can explore our website:\nhttps://uat.morenateach.com/\nhttps://uat.morenateach.com/pricing-and-courses",
+          "timestamp": "2026-07-03T08:51:12.041Z"
+        },
+        {
+          "id": "m-usr-1783069365622",
+          "role": "user",
+          "content": "i am looking for teacher education",
+          "timestamp": "2026-07-03T09:02:45.622Z"
+        },
+        {
+          "id": "m-sys-1783069365622",
+          "role": "model",
+          "content": "I could not find this information on the website.\n\nPlease contact us on our Contact page: https://uat.morenateach.com/contact-us",
+          "timestamp": "2026-07-03T09:02:45.622Z"
+        },
+        {
+          "id": "m-usr-1783069405389",
+          "role": "user",
+          "content": "what about tilfi tara",
+          "timestamp": "2026-07-03T09:03:25.389Z"
+        },
+        {
+          "id": "m-sys-1783069405389",
+          "role": "model",
+          "content": "I could not find this information on the website.\n\nPlease contact us on our Contact page: https://uat.morenateach.com/contact-us",
+          "timestamp": "2026-07-03T09:03:25.389Z"
+        },
+        {
+          "id": "m-usr-1783069677135",
+          "role": "user",
+          "content": "what about tiliftara",
+          "timestamp": "2026-07-03T09:07:57.135Z"
+        },
+        {
+          "id": "m-sys-1783069677135",
+          "role": "model",
+          "content": "I could not find this information on the website.\n\nPlease contact us on our Contact page: https://uat.morenateach.com/contact-us",
+          "timestamp": "2026-07-03T09:07:57.135Z"
+        }
+      ],
+      "pageVisited": "https://ais-dev-duqb73buklup6rzfen7c3i-559113125525.asia-southeast1.run.app/widget?site=example-saas",
+      "metadata": {
+        "leadCaptureStep": "completed",
+        "leadName": "piyush",
+        "leadEmail": "piyush@morenatechnologies.com",
+        "leadPhone": "9849389483"
+      },
+      "leadId": "lead-ml3b3wq"
+    },
+    {
+      "id": "sess-koi5rppqwko",
+      "websiteId": "example-saas",
+      "visitorIp": "127.0.0.1",
+      "createdAt": "2026-07-03T09:03:05.979Z",
+      "updatedAt": "2026-07-03T09:03:05.979Z",
+      "messages": [
+        {
+          "id": "m-usr-1783069385979",
+          "role": "user",
+          "content": "jhii",
+          "timestamp": "2026-07-03T09:03:05.979Z"
+        },
+        {
+          "id": "m-sys-1783069385979",
+          "role": "model",
+          "content": "👋 Welcome! I’m your website assistant.\nBefore we start, please share your details.\n\nWhat is your name?",
+          "timestamp": "2026-07-03T09:03:05.979Z"
+        }
+      ],
+      "pageVisited": "https://ais-dev-duqb73buklup6rzfen7c3i-559113125525.asia-southeast1.run.app/widget?site=example-saas#",
+      "metadata": {
+        "leadCaptureStep": "name"
+      }
+    },
+    {
+      "id": "sess-e268ot3we9g",
+      "websiteId": "example-saas",
+      "visitorIp": "127.0.0.1",
+      "createdAt": "2026-07-03T09:05:33.743Z",
+      "updatedAt": "2026-07-03T09:05:52.472Z",
+      "messages": [
+        {
+          "id": "m-usr-1783069533743",
+          "role": "user",
+          "content": "“We help schools improve teaching quality, train educators, strengthen leadership teams, and implement modern international education practices.”",
+          "timestamp": "2026-07-03T09:05:33.743Z"
+        },
+        {
+          "id": "m-sys-1783069533743",
+          "role": "model",
+          "content": "👋 Welcome! I’m your website assistant.\nBefore we start, please share your details.\n\nWhat is your name?",
+          "timestamp": "2026-07-03T09:05:33.743Z"
+        },
+        {
+          "id": "m-usr-1783069537656",
+          "role": "user",
+          "content": "piyush",
+          "timestamp": "2026-07-03T09:05:37.656Z"
+        },
+        {
+          "id": "m-sys-1783069537656",
+          "role": "model",
+          "content": "Thanks piyush! What is your email address?",
+          "timestamp": "2026-07-03T09:05:37.656Z"
+        },
+        {
+          "id": "m-usr-1783069540513",
+          "role": "user",
+          "content": "test@gmail.com",
+          "timestamp": "2026-07-03T09:05:40.513Z"
+        },
+        {
+          "id": "m-sys-1783069540513",
+          "role": "model",
+          "content": "Thanks! What is your phone number?",
+          "timestamp": "2026-07-03T09:05:40.513Z"
+        },
+        {
+          "id": "m-usr-1783069547796",
+          "role": "user",
+          "content": "9898989898",
+          "timestamp": "2026-07-03T09:05:47.796Z"
+        },
+        {
+          "id": "m-sys-log-1783069547796",
+          "role": "system",
+          "content": "Lead captured: piyush (test@gmail.com, 9898989898)",
+          "timestamp": "2026-07-03T09:05:47.796Z"
+        },
+        {
+          "id": "m-sys-1783069547796",
+          "role": "model",
+          "content": "Thanks piyush 👍 Now you can ask anything about this website.",
+          "timestamp": "2026-07-03T09:05:47.796Z"
+        },
+        {
+          "id": "m-usr-1783069552472",
+          "role": "user",
+          "content": "“We help schools improve teaching quality, train educators, strengthen leadership teams, and implement modern international education practices.”",
+          "timestamp": "2026-07-03T09:05:52.472Z"
+        },
+        {
+          "id": "m-sys-1783069552472",
+          "role": "model",
+          "content": "I could not find this information on the website.\n\nPlease contact us on our Contact page: https://uat.morenateach.com/contact-us",
+          "timestamp": "2026-07-03T09:05:52.472Z"
+        }
+      ],
+      "pageVisited": "https://ais-dev-duqb73buklup6rzfen7c3i-559113125525.asia-southeast1.run.app/widget?site=example-saas",
+      "metadata": {
+        "leadCaptureStep": "completed",
+        "leadName": "piyush",
+        "leadEmail": "test@gmail.com",
+        "leadPhone": "9898989898"
+      },
+      "leadId": "lead-g4oi3z8"
+    },
+    {
+      "id": "sess-08kh6pe2f0oo",
+      "websiteId": "example-saas",
+      "visitorIp": "127.0.0.1",
+      "createdAt": "2026-07-03T09:08:13.466Z",
+      "updatedAt": "2026-07-03T09:08:24.970Z",
+      "messages": [
+        {
+          "id": "m-usr-1783069693466",
+          "role": "user",
+          "content": "hii",
+          "timestamp": "2026-07-03T09:08:13.466Z"
+        },
+        {
+          "id": "m-sys-1783069693466",
+          "role": "model",
+          "content": "👋 Welcome! I’m your website assistant.\nBefore we start, please share your details.\n\nWhat is your name?",
+          "timestamp": "2026-07-03T09:08:13.466Z"
+        },
+        {
+          "id": "m-usr-1783069697348",
+          "role": "user",
+          "content": "test",
+          "timestamp": "2026-07-03T09:08:17.348Z"
+        },
+        {
+          "id": "m-sys-1783069697348",
+          "role": "model",
+          "content": "Thanks test! What is your email address?",
+          "timestamp": "2026-07-03T09:08:17.348Z"
+        },
+        {
+          "id": "m-usr-1783069700878",
+          "role": "user",
+          "content": "test@gmail.com",
+          "timestamp": "2026-07-03T09:08:20.878Z"
+        },
+        {
+          "id": "m-sys-1783069700878",
+          "role": "model",
+          "content": "Thanks! What is your phone number?",
+          "timestamp": "2026-07-03T09:08:20.878Z"
+        },
+        {
+          "id": "m-usr-1783069704970",
+          "role": "user",
+          "content": "98989989899",
+          "timestamp": "2026-07-03T09:08:24.970Z"
+        },
+        {
+          "id": "m-sys-log-1783069704970",
+          "role": "system",
+          "content": "Lead captured: test (test@gmail.com, 98989989899)",
+          "timestamp": "2026-07-03T09:08:24.970Z"
+        },
+        {
+          "id": "m-sys-1783069704970",
+          "role": "model",
+          "content": "Thanks test 👍 Now you can ask anything about this website.",
+          "timestamp": "2026-07-03T09:08:24.970Z"
+        }
+      ],
+      "pageVisited": "https://ais-dev-duqb73buklup6rzfen7c3i-559113125525.asia-southeast1.run.app/widget?site=example-saas",
+      "metadata": {
+        "leadCaptureStep": "completed",
+        "leadName": "test",
+        "leadEmail": "test@gmail.com",
+        "leadPhone": "98989989899"
+      },
+      "leadId": "lead-h4yd4q2"
+    },
+    {
+      "id": "sess-bjxwnqils49",
+      "websiteId": "example-saas",
+      "visitorIp": "127.0.0.1",
+      "createdAt": "2026-07-03T09:13:29.106Z",
+      "updatedAt": "2026-07-03T09:13:57.145Z",
+      "messages": [
+        {
+          "id": "m-usr-1783070009106",
+          "role": "user",
+          "content": "hii",
+          "timestamp": "2026-07-03T09:13:29.106Z"
+        },
+        {
+          "id": "m-sys-1783070009106",
+          "role": "model",
+          "content": "👋 Welcome! I’m your website assistant.\nBefore we start, please share your details.\n\nWhat is your name?",
+          "timestamp": "2026-07-03T09:13:29.106Z"
+        },
+        {
+          "id": "m-usr-1783070011765",
+          "role": "user",
+          "content": "piyush",
+          "timestamp": "2026-07-03T09:13:31.765Z"
+        },
+        {
+          "id": "m-sys-1783070011765",
+          "role": "model",
+          "content": "Thanks piyush! What is your email address?",
+          "timestamp": "2026-07-03T09:13:31.765Z"
+        },
+        {
+          "id": "m-usr-1783070016556",
+          "role": "user",
+          "content": "test@gmail.com",
+          "timestamp": "2026-07-03T09:13:36.556Z"
+        },
+        {
+          "id": "m-sys-1783070016556",
+          "role": "model",
+          "content": "Thanks! What is your phone number?",
+          "timestamp": "2026-07-03T09:13:36.556Z"
+        },
+        {
+          "id": "m-usr-1783070021104",
+          "role": "user",
+          "content": "898989898",
+          "timestamp": "2026-07-03T09:13:41.104Z"
+        },
+        {
+          "id": "m-sys-log-1783070021104",
+          "role": "system",
+          "content": "Lead captured: piyush (test@gmail.com, 898989898)",
+          "timestamp": "2026-07-03T09:13:41.104Z"
+        },
+        {
+          "id": "m-sys-1783070021104",
+          "role": "model",
+          "content": "Thanks piyush 👍 Now you can ask anything about this website.",
+          "timestamp": "2026-07-03T09:13:41.104Z"
+        },
+        {
+          "id": "m-usr-1783070026266",
+          "role": "user",
+          "content": "hii",
+          "timestamp": "2026-07-03T09:13:46.266Z"
+        },
+        {
+          "id": "m-sys-1783070026266",
+          "role": "model",
+          "content": "I couldn't find a direct answer to that specific question on the website.\n\nPlease feel free to contact us on our Contact page: https://uat.morenateach.com/contact-us",
+          "timestamp": "2026-07-03T09:13:46.266Z"
+        },
+        {
+          "id": "m-usr-1783070037145",
+          "role": "user",
+          "content": "what about teacher education",
+          "timestamp": "2026-07-03T09:13:57.145Z"
+        },
+        {
+          "id": "m-sys-1783070037145",
+          "role": "model",
+          "content": "I couldn't find a direct answer to that specific question on the website.\n\nPlease feel free to contact us on our Contact page: https://uat.morenateach.com/contact-us",
+          "timestamp": "2026-07-03T09:13:57.145Z"
+        }
+      ],
+      "pageVisited": "https://ais-dev-duqb73buklup6rzfen7c3i-559113125525.asia-southeast1.run.app/widget?site=example-saas",
+      "metadata": {
+        "leadCaptureStep": "completed",
+        "leadName": "piyush",
+        "leadEmail": "test@gmail.com",
+        "leadPhone": "898989898"
+      },
+      "leadId": "lead-sqgzyb0"
+    },
+    {
+      "id": "sess-t7krms9l4nj",
+      "websiteId": "example-saas",
+      "visitorIp": "127.0.0.1",
+      "createdAt": "2026-07-03T09:19:06.426Z",
+      "updatedAt": "2026-07-03T09:20:52.347Z",
+      "messages": [
+        {
+          "id": "m-usr-1783070346426",
+          "role": "user",
+          "content": "hii",
+          "timestamp": "2026-07-03T09:19:06.426Z"
+        },
+        {
+          "id": "m-sys-1783070346426",
+          "role": "model",
+          "content": "👋 Welcome! I’m your website assistant.\nBefore we start, please share your details.\n\nWhat is your name?",
+          "timestamp": "2026-07-03T09:19:06.426Z"
+        },
+        {
+          "id": "m-usr-1783070350217",
+          "role": "user",
+          "content": "test",
+          "timestamp": "2026-07-03T09:19:10.217Z"
+        },
+        {
+          "id": "m-sys-1783070350217",
+          "role": "model",
+          "content": "Thanks test! What is your email address?",
+          "timestamp": "2026-07-03T09:19:10.217Z"
+        },
+        {
+          "id": "m-usr-1783070353627",
+          "role": "user",
+          "content": "test@gmail.com",
+          "timestamp": "2026-07-03T09:19:13.627Z"
+        },
+        {
+          "id": "m-sys-1783070353627",
+          "role": "model",
+          "content": "Thanks! What is your phone number?",
+          "timestamp": "2026-07-03T09:19:13.627Z"
+        },
+        {
+          "id": "m-usr-1783070356801",
+          "role": "user",
+          "content": "9839849384",
+          "timestamp": "2026-07-03T09:19:16.801Z"
+        },
+        {
+          "id": "m-sys-log-1783070356801",
+          "role": "system",
+          "content": "Lead captured: test (test@gmail.com, 9839849384)",
+          "timestamp": "2026-07-03T09:19:16.801Z"
+        },
+        {
+          "id": "m-sys-1783070356801",
+          "role": "model",
+          "content": "Thanks test 👍 Now you can ask anything about this website.",
+          "timestamp": "2026-07-03T09:19:16.801Z"
+        },
+        {
+          "id": "m-usr-1783070365837",
+          "role": "user",
+          "content": "what about tilftara",
+          "timestamp": "2026-07-03T09:19:25.837Z"
+        },
+        {
+          "id": "m-sys-1783070365837",
+          "role": "model",
+          "content": "Based on our \"Morena Teach | Premier Online Teacher Education & Professional Development\" page:\n\nWelcome to Morena Teach, the ultimate online education portal designed specifically for modern educators seeking licensing, continuous professional development (CPD), and classroom mastery. Our mission is to empower teachers, administrators, and educational support staff with top-tier training, high-quality curriculum resources, and state-aligned preparation programs. Whether you are seeking to renew your teaching certificate, complete your mandatory Continuing Education Units (CEUs), learn how to integrate AI in the classroom, or master special education accommodation strategies, Morena Teach provides self-paced, expert-led training courses that fit your busy schedule...\n\nSource: https://uat.morenateach.com/",
+          "timestamp": "2026-07-03T09:19:25.837Z"
+        },
+        {
+          "id": "m-usr-1783070382887",
+          "role": "user",
+          "content": "it's a morena teach",
+          "timestamp": "2026-07-03T09:19:42.887Z"
+        },
+        {
+          "id": "m-sys-1783070382887",
+          "role": "model",
+          "content": "Based on our \"Empowering Schools and Educators Across the Middle East Exceptional schools are built by exceptional educators. Behind every thriving learning community is a shared commitment to professional growth, educational excellence, and meaningful student outcomes. TIFL TARA is Morenateach’s international outreach and engagement platform dedicated to supporting schools, educators, and educational leaders across the Middle East. We partner with schools to strengthen teaching and learning, build leadership capacity, enhance curriculum and assessment practices, and create future-ready learning environments where both educators and learners can thrive. In a rapidly evolving educational landscape, schools face increasing expectations to deliver high-quality learning experiences, support educator wellbeing, foster innovation, and prepare students for an increasingly complex world. TIFL TARA connects schools with the expertise, programs, and educational solutions needed to navigate these challenges with confidence and purpose.   Why Schools Partner With TIFL TARA Today’s schools require more than professional development events. They require strategic partners who understand the interconnected nature of teaching quality, leadership effectiveness, curriculum design, and school improvement. Through Morenateach, TIFL TARA supports schools in building sustainable systems that strengthen educational quality, empower educators, and create meaningful learning experiences.  Our work is guided by a commitment to: schools Educational Excellence  international schools Continuous Professional Growth   kindergarten programs Student-Centred Learning  Educational trusts Leadership Development   Leadership Teams Future-Ready Education  Growing Schools School Improvement and innovation   schools preparing International Best Practices  How We Support Schools 01 Developing Exceptional Educators Great learning begins with great teaching. We support educators through professional learning experiences that strengthen instructional practice, inquiry-based learning, assessment literacy, inclusion, and learner engagement.  Explore Teacher Education Programs   02 Strengthening School Performance Sustainable improvement requires a clear understanding of strengths, opportunities, and priorities. We work alongside schools to enhance teaching quality, professional learning cultures, and whole-school improvement initiatives.  Explore School Enhancement Programs   03 Advancing Early Years Excellence The early years establish the foundation for lifelong learning. We help schools strengthen early childhood programs, improve school readiness outcomes, enhance educator capability, and create exceptional learning experiences for young learners.  Explore Early Year Excellence   04 Enhancing Curriculum and Learning Curriculum should inspire curiosity, engagement, and deeper understanding. We support schools through curriculum design, curriculum review, inquiry integration, learning experience design, and assessment framework development aligned with contemporary educational expectations.  Explore Curriculum & Academic Consulting   05 Building Future-Ready Leaders Strong leadership drives educational excellence. We support principals, coordinators, and leadership teams in developing the capabilities needed to lead teaching and learning, drive improvement, and navigate change effectively.  Explore Leadership  Development   Who We Work With TIFL TARA Partners with:  Whether supporting a single school or a wider educational network, our focus remains the same: empowering educators, strengthening schools, and improving learning outcomes for every student.  A Partnership for Educational Excellence We believe meaningful educational improvement happens when schools invest in their people, strengthen their systems, and create cultures where learning never stops. Through TIFL TARA, schools gain access to Morenateach’s expertise across teacher education, school improvement, curriculum consulting, leadership development, and early years excellence—creating integrated solutions that support both immediate priorities and long-term growth.  Begin Your Journey with Morena Teach Discover how our programs can support your school’s vision for excellence, innovation, and future-ready learning.  Follow Us On Instagram [instagram-feed]  Contact Us A-28, Block A, Sector 57, Noida, Uttar Pradesh 201309 Email : morena@morenateach.com Phone No : +91 9625972523 Quick Links Home About Us Write To Us Services Teacher Education School  Solutions Legal Privacy Cookie policy © 2026 Morena Teach | Morena Technologies. All Rights Reserved.    \" page:\n\nBehind every thriving learning community is a shared commitment to professional growth, educational excellence, and meaningful student outcomes. TIFL TARA is Morenateach’s international outreach and engagement platform dedicated to supporting schools, educators, and educational leaders across the Middle East. We partner with schools to strengthen teaching and learning, build leadership capacity, enhance curriculum and assessment practices, and create future-ready learning environments where both educators and learners can thrive. In a rapidly evolving educational landscape, schools face increasing expectations to deliver high-quality learning experiences, support educator wellbeing, foster innovation, and prepare students for an increasingly complex world...\n\nSource: https://uat.morenateach.com/tifl-tara/",
+          "timestamp": "2026-07-03T09:19:42.887Z"
+        },
+        {
+          "id": "m-usr-1783070442946",
+          "role": "user",
+          "content": "i am looking for viveka learing",
+          "timestamp": "2026-07-03T09:20:42.946Z"
+        },
+        {
+          "id": "m-sys-1783070442946",
+          "role": "model",
+          "content": "Based on our \"Morena Teach | Premier Online Teacher Education & Professional Development\" page:\n\nWelcome to Morena Teach, the ultimate online education portal designed specifically for modern educators seeking licensing, continuous professional development (CPD), and classroom mastery. Our mission is to empower teachers, administrators, and educational support staff with top-tier training, high-quality curriculum resources, and state-aligned preparation programs. Whether you are seeking to renew your teaching certificate, complete your mandatory Continuing Education Units (CEUs), learn how to integrate AI in the classroom, or master special education accommodation strategies, Morena Teach provides self-paced, expert-led training courses that fit your busy schedule...\n\nSource: https://uat.morenateach.com/",
+          "timestamp": "2026-07-03T09:20:42.946Z"
+        },
+        {
+          "id": "m-usr-1783070452347",
+          "role": "user",
+          "content": "viveka learining",
+          "timestamp": "2026-07-03T09:20:52.347Z"
+        },
+        {
+          "id": "m-sys-1783070452347",
+          "role": "model",
+          "content": "Based on our \"Morena Teach | Premier Online Teacher Education & Professional Development\" page:\n\nWelcome to Morena Teach, the ultimate online education portal designed specifically for modern educators seeking licensing, continuous professional development (CPD), and classroom mastery. Our mission is to empower teachers, administrators, and educational support staff with top-tier training, high-quality curriculum resources, and state-aligned preparation programs. Whether you are seeking to renew your teaching certificate, complete your mandatory Continuing Education Units (CEUs), learn how to integrate AI in the classroom, or master special education accommodation strategies, Morena Teach provides self-paced, expert-led training courses that fit your busy schedule...\n\nSource: https://uat.morenateach.com/",
+          "timestamp": "2026-07-03T09:20:52.347Z"
+        }
+      ],
+      "pageVisited": "https://ais-dev-duqb73buklup6rzfen7c3i-559113125525.asia-southeast1.run.app/widget?site=example-saas",
+      "metadata": {
+        "leadCaptureStep": "completed",
+        "leadName": "test",
+        "leadEmail": "test@gmail.com",
+        "leadPhone": "9839849384"
+      },
+      "leadId": "lead-zfrq9n1"
+    }
+  ]
+}
