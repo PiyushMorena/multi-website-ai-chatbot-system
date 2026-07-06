@@ -887,6 +887,40 @@
         "leadPhone": "9839849384"
       },
       "leadId": "lead-zfrq9n1"
+    },
+    {
+      "id": "sess-pbzuumz11ld",
+      "websiteId": "example-saas",
+      "visitorIp": "127.0.0.1",
+      "createdAt": "2026-07-06T05:50:26.832Z",
+      "updatedAt": "2026-07-06T05:50:36.513Z",
+      "messages": [
+        {
+          "id": "m-usr-1783317026832",
+          "role": "user",
+          "content": "hi",
+          "timestamp": "2026-07-06T05:50:26.832Z"
+        },
+        {
+          "id": "m-sys-1783317026832",
+          "role": "model",
+          "content": "Hello! 👋 Welcome to our website. How can I help you today?",
+          "timestamp": "2026-07-06T05:50:26.832Z"
+        },
+        {
+          "id": "m-usr-1783317036513",
+          "role": "user",
+          "content": "please give me professinal teacher",
+          "timestamp": "2026-07-06T05:50:36.513Z"
+        },
+        {
+          "id": "m-sys-1783317036513",
+          "role": "model",
+          "content": "Welcome to Morena Teach, the ultimate online education portal designed specifically for modern educators seeking licensing, continuous professional development (CPD), and classroom mastery. Our mission is to empower teachers, administrators, and educational support staff with top-tier training, high-quality curriculum resources, and state-aligned preparation programs. Whether you are seeking to renew your teaching certificate, complete your mandatory Continuing Education Units (CEUs), learn how to integrate AI in the classroom, or master special education accommodation strategies, Morena Teach provides self-paced, expert-led training courses that fit your busy schedule. We help schools improve teaching quality, train educators, strengthen leadership teams, and implement modern international education practices\n\nMore Details: https://uat.morenateach.com/",
+          "timestamp": "2026-07-06T05:50:36.513Z"
+        }
+      ],
+      "pageVisited": "http://localhost:3000/widget?site=example-saas"
     }
   ]
 }

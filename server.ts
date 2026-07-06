@@ -44,16 +44,13 @@ app.get('/api/websites', (req, res) => {
 });
 
 app.get('/api/websites/:id', (req, res) => {
-  const website = dbManager.getWebsite(req.params.id);
-
-  if (!website) {
-    return res.status(404).json({
-      error: 'Website not found'
-    });
+  const site = dbManager.getWebsite(req.params.id);
+  if (!site) {
+    return res.status(404).json({ error: 'Website not found' });
   }
-
-  res.json(website);
+  res.json(site);
 });
+
 app.post('/api/websites', (req, res) => {
   const { name, url, welcomeMessage, contactPageUrl, leadCaptureEnabled } = req.body;
   if (!name || !url) {
@@ -179,6 +176,54 @@ app.get('/api/websites/:id/sessions', (req, res) => {
   res.json(dbManager.getSessions(req.params.id));
 });
 
+// Helper to return high-fidelity natural responses to exact social greetings and conversational endings
+function getGreetingOrSocialResponse(msg: string): string | null {
+  const norm = msg.trim().toLowerCase().replace(/[.,\/#!$%\^&\*;:{}=\-_`~()?]/g, "").trim();
+  
+  // Exact greetings from user requirements
+  if (norm === 'hi' || norm === 'hello' || norm === 'hey') {
+    return `Hello! 👋 Welcome to our website. How can I help you today?`;
+  }
+  if (norm === 'good morning') {
+    return `Good Morning! ☀️ Welcome to our website. How may I assist you today?`;
+  }
+  if (norm === 'good afternoon') {
+    return `Good Afternoon! 😊 Welcome! How can I help you today?`;
+  }
+  if (norm === 'good evening') {
+    return `Good Evening! 😊 Welcome! How can I help you today?`;
+  }
+  if (norm === 'good night') {
+    return `Good Night! 🌙 Have a wonderful night. Feel free to ask if you need anything before you go.`;
+  }
+  if (norm === 'how are you' || norm === 'how r u' || norm === 'how are you doing') {
+    return `I'm doing great, thank you for asking! 😊 How can I help you today?`;
+  }
+  if (norm === 'thanks' || norm === 'thank you' || norm === 'thank u' || norm === 'thx' || norm === 'ty') {
+    return `You're welcome! 😊 Happy to help.`;
+  }
+  if (norm === 'bye' || norm === 'goodbye' || norm === 'bye bye' || norm === 'byebye') {
+    return `Thank you for visiting! Have a great day. If you need any further assistance, feel free to come back anytime.`;
+  }
+  
+  // Conversational endings / closure
+  const endings = [
+    'that is all', "that's all", 'no more questions', 'no thank you', 'no thanks', 
+    'nothing else', 'i am done', 'all good', 'fully answered', 'no questions left'
+  ];
+  if (endings.includes(norm)) {
+    const closings = [
+      `Thank you for visiting! 😊 If you have any more questions, I'm always happy to help.`,
+      `Thanks for contacting us. Have a great day!`,
+      `It was a pleasure assisting you. Feel free to reach out if you need anything else.`
+    ];
+    // Consistently return one or rotate based on timestamp to give a dynamic feel
+    return closings[Math.floor(Date.now() / 1000) % closings.length];
+  }
+  
+  return null;
+}
+
 // Helper for high-fidelity offline/fallback keyword-based RAG matching when Gemini is offline or slow
 function performOfflineRAGSearch(pages: WebPage[], websiteUrl: string, contactUrl: string, lowercaseMsg: string): string {
   // Tokenize query into lowercase keywords, filtering out common stop words
@@ -264,7 +309,7 @@ function performOfflineRAGSearch(pages: WebPage[], websiteUrl: string, contactUr
 
     return `${finalAnswer}\n\nMore Details: ${bestPage.url}`;
   } else {
-    return `I am sorry, but I could not find this information on the websites. Please feel free to reach out to us directly on our contact page for further help at: ${contactUrl}`;
+    return `I'm here to assist with questions related to this website. Please ask me anything about our services, products, or information available here. (I could not find this information in our scraped content.)`;
   }
 }
 
@@ -300,156 +345,30 @@ app.post('/api/chat', async (req, res) => {
     session.pageVisited = pageVisited || session.pageVisited;
   }
 
+
+
   const lowercaseMsg = cleanMessage.toLowerCase();
-  const isGreeting = ['hello', 'hi', 'help', 'hey', 'start', 'get started'].some(g => lowercaseMsg.includes(g));
-
-  // CHECK LEAD CAPTURE FLOW
-  if (website.leadCaptureEnabled) {
-    // Read custom metadata on session for step
-    const sessionMeta: any = session.metadata || {};
-    const step = sessionMeta.leadCaptureStep;
-
-    // Trigger Lead Capture Welcome if:
-    // - Session is empty
-    // - OR User said greeting AND lead capture is not completed
-    if (!step && (session.messages.length === 0 || isGreeting)) {
-      sessionMeta.leadCaptureStep = 'name';
-      session.metadata = sessionMeta;
-
-      const welcomeResponse = `👋 Welcome! I’m your website assistant.
-Before we start, please share your details.
-
-What is your name?`;
-
-      session.messages.push({
-        id: 'm-usr-' + Date.now(),
-        role: 'user',
-        content: cleanMessage,
-        timestamp: new Date().toISOString()
-      });
-
-      session.messages.push({
-        id: 'm-sys-' + Date.now(),
-        role: 'model',
-        content: welcomeResponse,
-        timestamp: new Date().toISOString()
-      });
-
-      dbManager.createOrUpdateSession(session);
-      return res.json({ reply: welcomeResponse, step: 'name' });
-    }
-
-    // Capture Name step
-    if (step === 'name') {
-      sessionMeta.leadName = cleanMessage;
-      sessionMeta.leadCaptureStep = 'email';
-      session.metadata = sessionMeta;
-
-      const response = `Thanks ${cleanMessage}! What is your email address?`;
-
-      session.messages.push({
-        id: 'm-usr-' + Date.now(),
-        role: 'user',
-        content: cleanMessage,
-        timestamp: new Date().toISOString()
-      });
-
-      session.messages.push({
-        id: 'm-sys-' + Date.now(),
-        role: 'model',
-        content: response,
-        timestamp: new Date().toISOString()
-      });
-
-      dbManager.createOrUpdateSession(session);
-      return res.json({ reply: response, step: 'email' });
-    }
-
-    // Capture Email step
-    if (step === 'email') {
-      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-      if (!emailRegex.test(cleanMessage)) {
-        const errorMsg = `That doesn't look like a valid email. Please enter a valid email address (e.g. name@example.com):`;
-        return res.json({ reply: errorMsg, step: 'email' });
-      }
-
-      sessionMeta.leadEmail = cleanMessage;
-      sessionMeta.leadCaptureStep = 'phone';
-      session.metadata = sessionMeta;
-
-      const response = `Thanks! What is your phone number?`;
-
-      session.messages.push({
-        id: 'm-usr-' + Date.now(),
-        role: 'user',
-        content: cleanMessage,
-        timestamp: new Date().toISOString()
-      });
-
-      session.messages.push({
-        id: 'm-sys-' + Date.now(),
-        role: 'model',
-        content: response,
-        timestamp: new Date().toISOString()
-      });
-
-      dbManager.createOrUpdateSession(session);
-      return res.json({ reply: response, step: 'phone' });
-    }
-
-    // Capture Phone step
-    if (step === 'phone') {
-      // Basic phone verification: at least 7 digits
-      const digitsOnly = cleanMessage.replace(/\D/g, '');
-      if (digitsOnly.length < 7) {
-        const errorMsg = `Please enter a valid phone number (e.g., +1 555-0199 or 5550199):`;
-        return res.json({ reply: errorMsg, step: 'phone' });
-      }
-
-      sessionMeta.leadPhone = cleanMessage;
-      sessionMeta.leadCaptureStep = 'completed';
-      session.metadata = sessionMeta;
-
-      // Persist Lead in database!
-      const newLead = dbManager.addLead({
-        websiteId,
-        sessionId,
-        name: sessionMeta.leadName || 'Anonymous',
-        email: sessionMeta.leadEmail || '',
-        phone: sessionMeta.leadPhone || '',
-        ipAddress: ip
-      });
-
-      session.leadId = newLead.id;
-      
-      const completedResponse = `Thanks ${sessionMeta.leadName} 👍 Now you can ask anything about this website.`;
-
-      session.messages.push({
-        id: 'm-usr-' + Date.now(),
-        role: 'user',
-        content: cleanMessage,
-        timestamp: new Date().toISOString()
-      });
-
-      // System notification message
-      session.messages.push({
-        id: 'm-sys-log-' + Date.now(),
-        role: 'system',
-        content: `Lead captured: ${sessionMeta.leadName} (${sessionMeta.leadEmail}, ${sessionMeta.leadPhone})`,
-        timestamp: new Date().toISOString()
-      });
-
-      session.messages.push({
-        id: 'm-sys-' + Date.now(),
-        role: 'model',
-        content: completedResponse,
-        timestamp: new Date().toISOString()
-      });
-
-      dbManager.createOrUpdateSession(session);
-      return res.json({ reply: completedResponse, step: 'completed' });
-    }
+  
+  // High-fidelity programmatic intercept for greetings and social endings to ensure exact matches
+  const socialReply = getGreetingOrSocialResponse(cleanMessage);
+  if (socialReply) {
+    session.messages.push({
+      id: 'm-usr-' + Date.now(),
+      role: 'user',
+      content: cleanMessage,
+      timestamp: new Date().toISOString()
+    });
+    session.messages.push({
+      id: 'm-sys-' + Date.now(),
+      role: 'model',
+      content: socialReply,
+      timestamp: new Date().toISOString()
+    });
+    dbManager.createOrUpdateSession(session);
+    return res.json({ reply: socialReply });
   }
+
+  const isGreeting = ['hello', 'hi', 'help', 'hey', 'start', 'get started'].some(g => lowercaseMsg.includes(g));
 
   // NORMAL CHAT MODE (RAG + AI)
   // Retrieve pages across ALL websites to allow multi-website answers
@@ -556,35 +475,35 @@ Title: ${p.title}
 Content: ${p.content}
 `).join('\n===\n');
 
-    const systemInstruction = `You are an intelligent, friendly, and highly conversational Multi-Website AI Chatbot assistant.
-You have access to the knowledge bases and pages of ALL added websites in the user's account:
+    const systemInstruction = `You are an intelligent, friendly, and highly conversational AI Chatbot assistant representing the website "${website.name}" (${website.url}), as well as other added websites in the account.
+You have access to the knowledge bases, pages, and overall scraped contents of ALL the following websites:
 ${allWebsites.map(w => `- "${w.name}" (${w.url})`).join('\n')}
 
-Your job is to understand and answer user questions in a natural, friendly, human-like manner, using ONLY the provided website content.
+Your goal is to converse naturally, beautifully, and dynamically—just like ChatGPT—while remaining strictly limited to the knowledge base of these scraped websites.
 
-STRICT RULES:
-1. UNDERSTAND USER RELEVANCY: First, determine if the user's question is related to the content of any of these websites. 
-   - If the query is relevant and can be answered using the provided content, give a conversational, warm, and highly tailored answer.
-   - If the question is NOT related to any of the websites, or cannot be answered from the provided content, politely and warmly inform the user that you could not find this information on the websites. Provide the official Contact Us URL (${contactUrl}) for further assistance.
-   - Note: If you cannot find the answer, your response MUST contain the phrase "could not find this information" so the system can display a contact button, but write it in a natural, polite sentence (e.g., "I'm sorry, but I could not find this information on our websites. You can contact support directly at ${contactUrl} for further assistance!").
+CONVERSATION & GREETING BEHAVIOR (Like ChatGPT):
+1. GREETINGS & SOCIAL FLOW: Always greet users normally and warmly. Use natural, human-like answers.
+2. CHATGPT TONE: Avoid sounding robotic, rigid, or template-based. Handle casual conversation, greetings, and expressions of gratitude (e.g., "thanks", "thank you", "perfect") in a friendly, conversational manner.
+3. CONTEXTUAL CONTINUITY: Understand follow-up questions naturally using the previous Chat History. Answer within the continuous conversational context.
+4. CONCISENESS (CRITICAL): Keep your answers extremely short, direct, and to the point. Give the shortest complete answer possible.
 
-2. CONCISE & HUMAN-LIKE: Do NOT use rigid, robotic prefixes or headings like "Answer:" or "Relevant Page:". Answer like a real, helpful human support agent. Keep your response short, precise, and friendly (max 2-3 sentences). Do not use long paragraphs or filler text.
-
-3. CONTEXT GROUNDING: Gently ground your response in the context of the website being queried by mentioning its name naturally (e.g., "At ${website.name}, we..." or "Over at ${allWebsites[1]?.name || 'Brew & Co.'}, our...").
-
-4. RELEVANT LINKS: If the answer is found on a specific page, you MUST include a "Read More" or "More Details" link at the end of your response. Format it exactly as "Read More: <URL>" or "More Details: <URL>". Never invent or guess URLs. For example: "More Details: https://example.com/about".
-
-5. ACCURACY: Do NOT use external knowledge. Do NOT guess, hallucinate, or fabricate services, pricing, or details.
+STRICT KNOWLEDGE LIMITATION & RAG RETRIEVAL ACROSS WEBSITES:
+1. ALL PAGES SEARCH: Search the scraped content and overall pages across ALL added websites to find the most related information to the user's query.
+2. WEBSITE ONLY: Your answers to factual or information-seeking questions must be strictly based on the provided website knowledge base content. Do not invent details, pricing, features, or contact info that does not exist in the provided pages.
+3. OUT-OF-SCOPE QUESTIONS: If a user asks questions that are NOT related to any of the websites (e.g., "What is quantum physics?", "Write a Python script", "how's the weather", or other general knowledge topics unrelated to the scraped content), you MUST NOT use external GPT knowledge to answer. Instead, respond with EXACTLY:
+   "I'm here to assist with questions related to this website. Please ask me anything about our services, products, or information available here. (I could not find this information in our scraped content.)"
+4. INTEGRATING MULTIPLE PAGES: If multiple pages or websites contain relevant information to answer a user's question, merge them seamlessly and elegantly into a single natural response.
+5. MORE DETAILS LINKS: Whenever you answer a question using info from a specific page or website, include a clickable "Read More" or "More Details" link at the end of your response, formatted exactly as:
+   "Read More: <URL>" or "More Details: <URL>" (using the actual URL from the metadata). This creates a clickable button option in the chat widget. Never guess or hallucinate URLs.
 
 Style Rules:
-- Natural, warm, conversational English
-- Very short, precise, and useful answers matching the user's intent
-- No long paragraphs
-- No filler text`;
+- Conversational, warm, engaging, and polished
+- No robotic prefixes or structural headers like "Based on my knowledge base:" or "Answer:"
+- Maximum of 1-2 very short sentences for all replies. Keep it exceptionally brief and direct.`;
 
     const chatHistory = session.messages
       .filter(m => m.role !== 'system')
-      .slice(-6) // Include up to last 6 messages of context
+      .slice(-10) // Include up to last 10 messages of context for strong conversational continuity
       .map(m => `${m.role === 'user' ? 'User' : 'Assistant'}: ${m.content}`)
       .join('\n');
 
@@ -600,11 +519,11 @@ New User Question: ${cleanMessage}
 
 Formulate your helpful, factual RAG response:`;
 
-    // Set a race timeout of 2.5s for snappy replies guaranteed under 3 seconds
+    // Set a race timeout of 8.0s for snappy yet highly reliable replies
     const timeoutPromise = new Promise<string>((resolve) => {
       setTimeout(() => {
         resolve('__TIMEOUT__');
-      }, 2500);
+      }, 8000);
     });
 
     const geminiPromise = (async () => {
@@ -619,8 +538,8 @@ Formulate your helpful, factual RAG response:`;
           }
         });
         return result.text || 'I could not find this information on the website.';
-      } catch (err) {
-        console.warn('Primary gemini-3.5-flash failed or hit quota limits. Attempting fallback to gemini-3.1-flash-lite...', err);
+      } catch (err: any) {
+        console.log(`[RAG] Primary gemini-3.5-flash not available: ${err?.message || err}`);
         try {
           const resultLite = await gemini.models.generateContent({
             model: 'gemini-3.1-flash-lite',
@@ -632,8 +551,8 @@ Formulate your helpful, factual RAG response:`;
             }
           });
           return resultLite.text || 'I could not find this information on the website.';
-        } catch (liteErr) {
-          console.error('All Gemini model endpoints exhausted (including gemini-3.1-flash-lite):', liteErr);
+        } catch (liteErr: any) {
+          console.log(`[RAG] Fallback gemini-3.1-flash-lite also not available: ${liteErr?.message || liteErr}`);
           return '__ERROR__';
         }
       }
@@ -643,7 +562,7 @@ Formulate your helpful, factual RAG response:`;
 
     let finalReply = reply;
     if (reply === '__TIMEOUT__' || reply === '__ERROR__') {
-      console.warn('Gemini request unresolved (timed out or failed). Performing offline keyword match fallback.');
+      console.log(`[RAG] Gemini request ${reply === '__TIMEOUT__' ? 'timed out' : 'failed'}. Performing offline keyword match fallback.`);
       finalReply = performOfflineRAGSearch(pagesForPrompt, website.url, contactUrl, lowercaseMsg);
     }
 
@@ -663,8 +582,8 @@ Formulate your helpful, factual RAG response:`;
 
     dbManager.createOrUpdateSession(session);
     return res.json({ reply: finalReply });
-  } catch (error) {
-    console.error('Gemini RAG failed:', error);
+  } catch (error: any) {
+    console.log(`[RAG] Gemini RAG exception handled: ${error?.message || error}`);
     const errorReply = `I apologize, but I encountered an error processing your query. Please contact support at ${contactUrl}.`;
     return res.json({ reply: errorReply });
   }
