@@ -646,8 +646,8 @@ Do not return any explanation or markdown formatting outside the JSON array itse
               }
             });
             jsonText = response.text?.trim() || '[]';
-          } catch (firstErr) {
-            console.warn('[Crawler Fallback] Primary gemini-3.5-flash failed or hit quota. Retrying with gemini-3.1-flash-lite...', firstErr);
+          } catch (firstErr: any) {
+            console.log(`[Crawler Fallback] Primary gemini-3.5-flash not available: ${firstErr?.message || firstErr}`);
             try {
               const responseLite = await ai.models.generateContent({
                 model: 'gemini-3.1-flash-lite',
@@ -657,8 +657,8 @@ Do not return any explanation or markdown formatting outside the JSON array itse
                 }
               });
               jsonText = responseLite.text?.trim() || '[]';
-            } catch (secondErr) {
-              console.error('[Crawler Fallback] Both gemini-3.5-flash and gemini-3.1-flash-lite failed:', secondErr);
+            } catch (secondErr: any) {
+              console.log(`[Crawler Fallback] Fallback gemini-3.1-flash-lite also not available: ${secondErr?.message || secondErr}`);
             }
           }
 
@@ -676,8 +676,8 @@ Do not return any explanation or markdown formatting outside the JSON array itse
               scrapedPagesCount++;
             }
           }
-        } catch (err) {
-          console.error('[Crawler Fallback] Gemini scraper simulation failed:', err);
+        } catch (err: any) {
+          console.log(`[Crawler Fallback] Gemini scraper simulation failed: ${err?.message || err}`);
         }
       }
 

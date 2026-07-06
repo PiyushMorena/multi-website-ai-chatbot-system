@@ -43,6 +43,17 @@ app.get('/api/websites', (req, res) => {
   res.json(dbManager.getWebsites());
 });
 
+app.get('/api/websites/:id', (req, res) => {
+  const website = dbManager.getWebsite(req.params.id);
+
+  if (!website) {
+    return res.status(404).json({
+      error: 'Website not found'
+    });
+  }
+
+  res.json(website);
+});
 app.post('/api/websites', (req, res) => {
   const { name, url, welcomeMessage, contactPageUrl, leadCaptureEnabled } = req.body;
   if (!name || !url) {

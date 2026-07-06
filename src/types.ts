@@ -50,6 +50,10 @@ export interface ChatSession {
   metadata?: {
     browser?: string;
     country?: string;
+    leadCaptureStep?: 'name' | 'email' | 'phone' | 'completed';
+    leadName?: string;
+    leadEmail?: string;
+    leadPhone?: string;
   };
 }
 

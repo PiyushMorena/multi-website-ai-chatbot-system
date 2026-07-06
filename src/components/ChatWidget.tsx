@@ -19,7 +19,6 @@ export default function ChatWidget() {
   const [websiteName, setWebsiteName] = useState('AI Assistant');
   const [leadCaptureEnabled, setLeadCaptureEnabled] = useState(true);
   const [contactPageUrl, setContactPageUrl] = useState('#');
-  const [currentStep, setCurrentStep] = useState<string>('normal');
 
   const messagesEndRef = useRef<HTMLDivElement>(null);
 
@@ -128,10 +127,14 @@ export default function ChatWidget() {
     );
   };
 
-  // Parse site ID from URL query parameters
+  // Parse site ID and load everything sequentially on mount
   useEffect(() => {
     const params = new URLSearchParams(window.location.search);
     const site = params.get('site');
+    if (!site) {
+      setSiteId(null);
+      return;
+    }
     setSiteId(site);
 
     // Initialize or retrieve Session ID
@@ -141,53 +144,63 @@ export default function ChatWidget() {
       sessionStorage.setItem(`ai_chatbot_session_${site}`, sess);
     }
     setSessionId(sess);
-  }, []);
 
-  // Fetch website configuration and preloaded messages
-  useEffect(() => {
-    if (!siteId) return;
+    let isCancelled = false;
 
-    fetch(`/api/websites/${siteId}`)
-      .then(res => {
-        if (!res.ok) throw new Error('Failed to fetch website config');
-        return res.json();
-      })
-      .then(data => {
-        setWebsiteName(data.name);
-        setWelcomeMessage(data.welcomeMessage);
-        setLeadCaptureEnabled(data.leadCaptureEnabled);
-        setContactPageUrl(data.contactPageUrl);
-      })
-      .catch(err => {
-        console.error(err);
-      });
+    const initWidget = async () => {
+      try {
+        // 1. Fetch website configuration
+        const configRes = await fetch(`/api/websites/${site}`);
+        if (!configRes.ok) throw new Error('Failed to fetch website config');
+        const configData = await configRes.json();
 
-    // Check if session has existing chats
-    fetch(`/api/websites/${siteId}/sessions`)
-      .then(res => res.json())
-      .then((sessions: any[]) => {
-        const currentSession = sessions.find(s => s.id === sessionId);
+        if (isCancelled) return;
+        setWebsiteName(configData.name || 'AI Assistant');
+        setWelcomeMessage(configData.welcomeMessage || '👋 Welcome! How can I help you today?');
+        setLeadCaptureEnabled(configData.leadCaptureEnabled ?? true);
+        setContactPageUrl(configData.contactPageUrl || '#');
+
+        // 2. Fetch session history
+        const sessionsRes = await fetch(`/api/websites/${site}/sessions`);
+        if (!sessionsRes.ok) throw new Error('Failed to fetch sessions');
+        const sessions = await sessionsRes.json();
+
+        if (isCancelled) return;
+        const currentSession = sessions.find((s: any) => s.id === sess);
         if (currentSession && currentSession.messages && currentSession.messages.length > 0) {
+          // Restore and preserve existing chat history
           setMessages(currentSession.messages);
-          // Set step based on metadata
-          if (currentSession.metadata && currentSession.metadata.leadCaptureStep) {
-            setCurrentStep(currentSession.metadata.leadCaptureStep);
-          }
         } else {
-          // If lead capture is disabled, append welcome message
-          // If enabled, the welcome message is triggered on first user message/greeting
+          // If no previous history, always start with the welcome message
           setMessages([
             {
               id: 'initial-welcome',
               role: 'model',
-              content: welcomeMessage,
+              content: configData.welcomeMessage || '👋 Welcome! How can I help you today?',
               timestamp: new Date().toISOString()
             }
           ]);
         }
-      })
-      .catch(err => console.error(err));
-  }, [siteId, sessionId, welcomeMessage]);
+      } catch (err) {
+        console.error('Error during ChatWidget initialization:', err);
+        if (isCancelled) return;
+        setMessages([
+          {
+            id: 'initial-welcome',
+            role: 'model',
+            content: '👋 Welcome! How can I help you today?',
+            timestamp: new Date().toISOString()
+          }
+        ]);
+      }
+    };
+
+    initWidget();
+
+    return () => {
+      isCancelled = true;
+    };
+  }, []);
 
   // Handle auto scrolling
   useEffect(() => {
@@ -196,7 +209,7 @@ export default function ChatWidget() {
 
   const handleSendMessage = async (e?: React.FormEvent) => {
     if (e) e.preventDefault();
-    if (!inputValue.trim() || !siteId) return;
+    if (!inputValue.trim() || !siteId || isLoading) return;
 
     const userMsg = inputValue.trim();
     setInputValue('');
@@ -240,9 +253,6 @@ export default function ChatWidget() {
           }
         ]);
       }
-      if (data.step) {
-        setCurrentStep(data.step);
-      }
     } catch (error) {
       console.error('Chat error:', error);
       setMessages(prev => [
@@ -269,25 +279,6 @@ export default function ChatWidget() {
     );
   }
 
-  // Get current step helper icons/placeholders
-  const getInputIcon = () => {
-    switch (currentStep) {
-      case 'name': return <User className="w-4 h-4 text-slate-400" />;
-      case 'email': return <Mail className="w-4 h-4 text-slate-400" />;
-      case 'phone': return <Phone className="w-4 h-4 text-slate-400" />;
-      default: return <MessageSquare className="w-4 h-4 text-slate-400" />;
-    }
-  };
-
-  const getInputPlaceholder = () => {
-    switch (currentStep) {
-      case 'name': return 'Enter your full name...';
-      case 'email': return 'Enter your email address...';
-      case 'phone': return 'Enter your phone number...';
-      default: return 'Type your question...';
-    }
-  };
-
   return (
     <div className="flex flex-col h-screen bg-white text-slate-800 selection:bg-slate-900 selection:text-white">
       {/* HEADER */}
@@ -309,37 +300,56 @@ export default function ChatWidget() {
       </div>
 
       {/* MESSAGES VIEWPORT */}
-      <div className="flex-1 overflow-y-auto px-5 py-6 space-y-4 bg-slate-50/50">
+      <div className="flex-1 overflow-y-auto px-5 py-6 space-y-5 bg-slate-50/50">
         <AnimatePresence initial={false}>
           {messages.map((msg, idx) => {
             // Hide system/log messages from the actual client chat bubble view
             if (msg.role === 'system') return null;
 
             const isUser = msg.role === 'user';
+            
+            // Format timestamp beautifully
+            let formattedTime = '';
+            try {
+              formattedTime = new Date(msg.timestamp).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+            } catch {
+              formattedTime = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+            }
+
             return (
               <motion.div
                 key={msg.id || idx}
-                initial={{ opacity: 0, y: 10 }}
+                initial={{ opacity: 0, y: 12 }}
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0 }}
                 transition={{ duration: 0.18 }}
                 className={`flex ${isUser ? 'justify-end' : 'justify-start'}`}
               >
-                <div className={`flex gap-2.5 max-w-[85%] ${isUser ? 'flex-row-reverse' : 'flex-row'}`}>
-                  {/* Bot Avatar */}
+                <div className={`flex gap-3 max-w-[85%] ${isUser ? 'flex-row-reverse' : 'flex-row'}`}>
+                  {/* Avatar */}
                   {!isUser && (
-                    <div className="w-7 h-7 rounded-full bg-slate-900 flex items-center justify-center text-[10px] font-bold text-white shrink-0 mt-0.5">
+                    <div className="w-8 h-8 rounded-full bg-gradient-to-tr from-slate-950 to-slate-800 flex items-center justify-center text-[10px] font-bold text-white shrink-0 mt-0.5 shadow-sm">
                       AI
                     </div>
                   )}
                   
                   <div className="flex flex-col">
+                    {/* Role Header and Time */}
+                    <div className={`flex items-center gap-1.5 mb-1 px-1 ${isUser ? 'justify-end' : 'justify-start'}`}>
+                      <span className="text-[11px] font-semibold text-slate-600">
+                        {isUser ? 'You' : websiteName}
+                      </span>
+                      <span className="text-[9px] text-slate-400 font-normal">
+                        {formattedTime}
+                      </span>
+                    </div>
+
                     {/* Chat Bubble */}
                     <div
-                      className={`px-4 py-3 text-[14px] leading-relaxed rounded-2xl ${
+                      className={`px-4 py-3 text-[14px] leading-relaxed transition-all duration-200 ${
                         isUser
-                          ? 'bg-slate-900 text-white rounded-tr-none shadow-sm'
-                          : 'bg-white text-slate-800 border border-slate-200/80 rounded-tl-none shadow-xs'
+                          ? 'bg-gradient-to-tr from-indigo-600 to-indigo-700 text-white rounded-2xl rounded-tr-xs shadow-md shadow-indigo-100/50 border border-indigo-500/10'
+                          : 'bg-white text-slate-800 border border-slate-200/80 rounded-2xl rounded-tl-xs shadow-xs hover:border-slate-300'
                       }`}
                     >
                       {isUser ? (
@@ -357,7 +367,7 @@ export default function ChatWidget() {
                             href={contactPageUrl}
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-slate-900 hover:bg-slate-800 text-white rounded-lg text-xs font-medium transition-colors"
+                            className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-slate-950 hover:bg-slate-800 text-white rounded-lg text-xs font-semibold transition-all hover:scale-[1.02] shadow-sm cursor-pointer"
                           >
                             <Mail className="w-3.5 h-3.5" /> Visit Contact Us
                           </a>
@@ -374,14 +384,19 @@ export default function ChatWidget() {
         {/* LOADING INDICATOR */}
         {isLoading && (
           <div className="flex justify-start">
-            <div className="flex gap-2.5 items-start max-w-[85%]">
-              <div className="w-7 h-7 rounded-full bg-slate-900 flex items-center justify-center text-[10px] font-bold text-white shrink-0">
+            <div className="flex gap-3 items-start max-w-[85%]">
+              <div className="w-8 h-8 rounded-full bg-gradient-to-tr from-slate-950 to-slate-800 flex items-center justify-center text-[10px] font-bold text-white shrink-0 shadow-sm">
                 AI
               </div>
-              <div className="px-4 py-3 bg-white text-slate-800 border border-slate-200/85 rounded-2xl rounded-tl-none shadow-xs flex items-center gap-1.5">
-                <span className="w-2 h-2 bg-slate-400 rounded-full animate-bounce"></span>
-                <span className="w-2 h-2 bg-slate-400 rounded-full animate-bounce [animation-delay:0.2s]"></span>
-                <span className="w-2 h-2 bg-slate-400 rounded-full animate-bounce [animation-delay:0.4s]"></span>
+              <div className="flex flex-col">
+                <div className="flex items-center gap-1.5 mb-1 px-1">
+                  <span className="text-[11px] font-semibold text-slate-600">{websiteName}</span>
+                </div>
+                <div className="px-4 py-3 bg-white text-slate-800 border border-slate-200/85 rounded-2xl rounded-tl-xs shadow-xs flex items-center gap-1.5">
+                  <span className="w-2 h-2 bg-slate-400 rounded-full animate-bounce"></span>
+                  <span className="w-2 h-2 bg-slate-400 rounded-full animate-bounce [animation-delay:0.2s]"></span>
+                  <span className="w-2 h-2 bg-slate-400 rounded-full animate-bounce [animation-delay:0.4s]"></span>
+                </div>
               </div>
             </div>
           </div>
@@ -393,13 +408,13 @@ export default function ChatWidget() {
       <div className="p-4 border-t border-slate-200 bg-white shrink-0">
         <form onSubmit={handleSendMessage} className="relative flex items-center">
           <div className="absolute left-3.5 flex items-center pointer-events-none">
-            {getInputIcon()}
+            <MessageSquare className="w-4 h-4 text-slate-400" />
           </div>
           <input
-            type={currentStep === 'email' ? 'email' : 'text'}
+            type="text"
             value={inputValue}
             onChange={(e) => setInputValue(e.target.value)}
-            placeholder={getInputPlaceholder()}
+            placeholder="Type your question..."
             className="w-full pl-10 pr-12 py-3 bg-slate-50 border border-slate-200 focus:border-slate-400 focus:bg-white focus:outline-hidden rounded-xl text-sm text-slate-800 placeholder-slate-400 transition-all"
             disabled={isLoading}
             required
